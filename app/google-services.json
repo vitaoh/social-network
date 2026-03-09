@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "51291205125",
+    "project_id": "microredesocialvitao",
+    "storage_bucket": "microredesocialvitao.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51291205125:android:8ee8be780046201f31f66c",
+        "android_client_info": {
+          "package_name": "br.com.vitao.miniredesocial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1tW-faKobtnxjZQFei2WD0JvVkIpLe3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
