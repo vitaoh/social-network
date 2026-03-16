@@ -10,70 +10,57 @@
     android:padding="24dp"
     tools:context=".LoginActivity">
 
-    <!-- Logo -->
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="240dp"
-        android:layout_height="160dp"
+        android:layout_width="200dp"
+        android:layout_height="140dp"
         android:layout_marginTop="32dp"
-        android:contentDescription="Perfil"
+        android:contentDescription="Logo da aplicação"
         android:scaleType="centerInside"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Foto de perfil -->
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imgProfile"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="12dp"
-        android:contentDescription="Perfil"
-        android:scaleType="centerCrop"
-        android:src="@drawable/empty_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo" />
-
-    <!-- Card Container para formulário -->
-        <com.google.android.material.card.MaterialCardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardForm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
+        android:layout_marginTop="48dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgProfile">
+        app:layout_constraintTop_toBottomOf="@id/logo">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp">
+            android:padding="28dp">
 
-            <!-- Label Email -->
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/lblEmail"
+                android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?attr/colorOnSurface"
+                android:text="Bem-vindo de volta!"
+                android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Campo Email -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:hint="Email"
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:endIconMode="clear_text"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lblEmail">
+                app:layout_constraintTop_toBottomOf="@id/txtTitle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtEmail"
@@ -84,15 +71,15 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Senha -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilSenha"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Senha"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="?attr/colorPrimary"
                 app:endIconMode="password_toggle"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilEmail">
@@ -106,28 +93,40 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Botão Entrar -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
-                android:text="Logar"
+                android:text="Entrar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilSenha" />
 
-            <!-- Botão Criar Usuário -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCreateUser"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="12dp"
-                android:text="Criar conta"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:text="Criar nova conta"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnLogin"
                 style="@style/Widget.Material3.Button.TextButton" />
+
+            <TextView
+                android:id="@+id/txtForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Esqueci minha senha"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/colorPrimary"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnCreateUser" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
