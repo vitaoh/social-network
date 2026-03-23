@@ -6,42 +6,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    tools:context=".ui.ProfileActivity">
+    tools:context=".ui.AddPostActivity">
 
+    <!-- Imagem selecionada para o post -->
+    <!-- CORRIGIDO: removido app:shapeAppearanceOverride (atributo inválido) -->
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imgProfile"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        android:contentDescription="Foto de perfil"
+        android:id="@+id/imgPost"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Imagem do post"
         android:scaleType="centerCrop"
         android:src="@drawable/empty_profile"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAlterarFoto"
+        android:id="@+id/btnSelecionarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Alterar Foto"
-        app:layout_constraintEnd_toEndOf="@id/imgProfile"
-        app:layout_constraintStart_toStartOf="@id/imgProfile"
-        app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+        android:layout_marginTop="12dp"
+        android:text="Selecionar Foto"
+        app:layout_constraintEnd_toEndOf="@id/imgPost"
+        app:layout_constraintStart_toStartOf="@id/imgPost"
+        app:layout_constraintTop_toBottomOf="@id/imgPost" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardForm"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         app:cardCornerRadius="20dp"
-        android:padding="32dp"
-        app:cardElevation="12dp"
-        android:layout_margin="24dp"
+        app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAlterarFoto">
+        app:layout_constraintTop_toBottomOf="@id/btnSelecionarFoto">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,58 +50,47 @@
             android:padding="24dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilUser"
+                android:id="@+id/tilDescricao"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Nome de usuário"
+                android:hint="O que você está pensando?"
                 app:boxStrokeColor="?attr/colorPrimary"
-                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtUser"
+                    android:id="@+id/edtDescricao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilNome"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Nome completo"
-                app:boxStrokeColor="?attr/colorPrimary"
-                app:endIconMode="clear_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilUser">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtNome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:maxLines="1" />
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:maxLines="5"
+                    android:gravity="top" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSalvar"
+                android:id="@+id/btnPublicar"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
-                android:layout_marginTop="32dp"
-                android:text="Salvar"
+                android:layout_marginTop="24dp"
+                android:text="Publicar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilNome" />
+                app:layout_constraintTop_toBottomOf="@id/tilDescricao" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelar"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:text="Cancelar"
+                style="@style/Widget.Material3.Button.TextButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPublicar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

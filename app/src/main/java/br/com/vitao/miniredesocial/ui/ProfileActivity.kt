@@ -1,4 +1,4 @@
-package br.com.vitao.miniredesocial
+package br.com.vitao.miniredesocial.ui
 
 import android.content.Intent
 import android.os.Bundle
