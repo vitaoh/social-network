@@ -9,7 +9,6 @@
     android:padding="24dp"
     tools:context=".ui.SignUpActivity">
 
-    <!-- Card Container do formulário -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardForm"
         android:layout_width="0dp"
@@ -23,14 +22,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Conteúdo do formulário -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/formContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="28dp">
 
-            <!-- Logo -->
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="200dp"
@@ -42,7 +39,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Título -->
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="0dp"
@@ -86,7 +82,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Label Senha -->
             <TextView
                 android:id="@+id/lblPassword"
                 android:layout_width="wrap_content"
@@ -98,7 +93,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilEmail" />
 
-            <!-- Campo Senha -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
                 android:layout_width="0dp"
@@ -118,7 +112,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Label Confirmar Senha -->
             <TextView
                 android:id="@+id/lblConfirmPassword"
                 android:layout_width="wrap_content"
@@ -130,7 +123,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
-            <!-- Campo Confirmar Senha -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilConfirmPassword"
                 android:layout_width="0dp"
@@ -150,7 +142,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Botão Criar Conta -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCreateAccount"
                 android:layout_width="0dp"
@@ -161,7 +152,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilConfirmPassword" />
 
-            <!-- Botão Voltar -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBack"
                 android:layout_width="0dp"

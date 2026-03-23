@@ -74,6 +74,10 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnSalvar.setOnClickListener {
             saveProfile()
         }
+
+        binding.btnCancelar.setOnClickListener {
+            finish()
+        }
     }
 
     private fun saveProfile() {

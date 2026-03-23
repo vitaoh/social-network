@@ -8,8 +8,6 @@
     android:padding="24dp"
     tools:context=".ui.AddPostActivity">
 
-    <!-- Imagem selecionada para o post -->
-    <!-- CORRIGIDO: removido app:shapeAppearanceOverride (atributo inválido) -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgPost"
         android:layout_width="0dp"
