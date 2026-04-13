@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.vitao.miniredesocial.databinding.ActivityProfileBinding
+import br.com.vitao.miniredesocial.util.Base64Converter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -82,40 +83,46 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun saveProfile() {
         val firebaseAuth = FirebaseAuth.getInstance()
-        if (firebaseAuth.currentUser != null) {
-            val email = firebaseAuth.currentUser!!.email.toString()
-            val username = binding.edtUser.text.toString().trim()
-            val nomeCompleto = binding.edtNome.text.toString().trim()
-
-            if (username.isEmpty() || nomeCompleto.isEmpty()) {
-                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
-                return
-            }
-
-            val db = FirebaseFirestore.getInstance()
-            val dados = hashMapOf(
-                "nomeCompleto" to nomeCompleto,
-                "username" to username
-            )
-
-            binding.btnSalvar.isEnabled = false
-
-            db.collection("usuarios").document(email)
-                .set(dados)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Perfil atualizado!", Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Erro ao salvar: ${it.message}", Toast.LENGTH_LONG).show()
-                    binding.btnSalvar.isEnabled = true
-                }
-        } else {
+        if (firebaseAuth.currentUser == null) {
             Toast.makeText(this, "Usuário não logado", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        val email        = firebaseAuth.currentUser!!.email.toString()
+        val username     = binding.edtUser.text.toString().trim()
+        val nomeCompleto = binding.edtNome.text.toString().trim()
+
+        if (username.isEmpty() || nomeCompleto.isEmpty()) {
+            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val fotoPerfil = try {
+            Base64Converter.drawableToString(binding.imgProfile.drawable)
+        } catch (e: Exception) {
+            ""
+        }
+
+        val dados = hashMapOf(
+            "nomeCompleto" to nomeCompleto,
+            "username"     to username,
+            "fotoPerfil"   to fotoPerfil   // ← campo que faltava
+        )
+
+        binding.btnSalvar.isEnabled = false
+
+        FirebaseFirestore.getInstance()
+            .collection("usuarios").document(email)
+            .set(dados)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Perfil atualizado!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Erro ao salvar: ${it.message}", Toast.LENGTH_LONG).show()
+                binding.btnSalvar.isEnabled = true
+            }
     }
 
 }
