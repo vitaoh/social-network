@@ -24,7 +24,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Redireciona para login se não houver usuário autenticado
         val firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth.currentUser == null) {
             startActivity(
@@ -50,7 +49,6 @@ class HomeActivity : AppCompatActivity() {
         setupListeners()
     }
 
-    // Recarrega o feed ao voltar de AddPostActivity
     override fun onResume() {
         super.onResume()
         carregarFeed()
@@ -84,19 +82,16 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        // Navega para edição de perfil
         binding.btnProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
-        // ✅ NOVO — Botão para adicionar post: abre AddPostActivity
         binding.btnAddPost.setOnClickListener {
             startActivity(Intent(this, AddPostActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
-        // Carrega o feed manualmente pelo botão
         binding.btnCarregarFeed.setOnClickListener {
             carregarFeed()
         }
@@ -123,8 +118,14 @@ class HomeActivity : AppCompatActivity() {
                 for (document in result.documents) {
                     val imageString = document.data?.get("imageString")?.toString() ?: continue
                     val descricao   = document.data?.get("descricao")?.toString() ?: ""
-                    val bitmap      = Base64Converter.stringToBitmap(imageString)
-                    posts.add(Post(descricao, bitmap))
+                    val username    = document.data?.get("username")?.toString() ?: ""
+                    val fotoAutor   = document.data?.get("fotoAutor")?.toString() ?: ""
+
+                    val bitmap         = Base64Converter.stringToBitmap(imageString)
+                    val fotoPerfilBitmap = if (fotoAutor.isNotEmpty())
+                        Base64Converter.stringToBitmap(fotoAutor) else null
+
+                    posts.add(Post(descricao, bitmap, username, fotoPerfilBitmap))
                 }
                 adapter = PostAdapter(posts.toTypedArray())
                 binding.recyclerView.layoutManager = LinearLayoutManager(this)

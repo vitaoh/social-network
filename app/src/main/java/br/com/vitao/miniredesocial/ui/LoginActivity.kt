@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
             autenticarUsuario()
         }
 
-        // ✅ CORRIGIDO - Navega para SignUpActivity
         binding.btnCreateUser.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
@@ -47,7 +46,6 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.edtEmail.text.toString().trim()
         val password = binding.edtSenha.text.toString().trim()
 
-        // Validações completas
         when {
             email.isEmpty() -> {
                 binding.edtEmail.error = "Email obrigatório"
@@ -67,7 +65,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Loading state
         binding.btnLogin.isEnabled = false
         binding.btnLogin.text = "Entrando..."
 

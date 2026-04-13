@@ -17,7 +17,6 @@ class AddPostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPostBinding
 
-    // Registra o seletor de mídia da galeria — mesmo padrão da ProfileActivity
     private val galeria = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri ->
@@ -45,7 +44,6 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-        // Abre galeria para selecionar imagem — idêntico à ProfileActivity
         binding.btnSelecionarFoto.setOnClickListener {
             galeria.launch(
                 PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
@@ -64,13 +62,11 @@ class AddPostActivity : AppCompatActivity() {
     private fun publicarPost() {
         val descricao = binding.edtDescricao.text.toString().trim()
 
-        // Validação da descrição
         if (descricao.isEmpty()) {
             Toast.makeText(this, "Escreva uma descrição para o post", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Converte a imagem exibida para Base64 — usa Base64Converter igual ao restante do projeto
         val imageString = try {
             Base64Converter.drawableToString(binding.imgPost.drawable)
         } catch (e: Exception) {
@@ -87,24 +83,32 @@ class AddPostActivity : AppCompatActivity() {
         binding.btnPublicar.isEnabled = false
 
         val db = FirebaseFirestore.getInstance()
+        db.collection("usuarios").document(emailAutor).get()
+            .addOnSuccessListener { document ->
+                val username   = document.getString("username") ?: ""
+                val fotoPerfil = document.getString("fotoPerfil") ?: ""
 
-        // Monta o documento seguindo a estrutura esperada pelo feed (imageString + descricao)
-        val post = hashMapOf(
-            "descricao"   to descricao,
-            "imageString" to imageString,
-            "emailAutor"  to emailAutor,
-            "timestamp"   to com.google.firebase.Timestamp.now()
-        )
+                val post = hashMapOf(
+                    "descricao"   to descricao,
+                    "imageString" to imageString,
+                    "emailAutor"  to emailAutor,
+                    "username"    to username,
+                    "fotoAutor"   to fotoPerfil,
+                    "timestamp"   to com.google.firebase.Timestamp.now()
+                )
 
-        // Salva na coleção "posts" com ID gerado automaticamente — mesmo padrão do saveProfile()
-        db.collection("posts")
-            .add(post)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Post publicado!", Toast.LENGTH_SHORT).show()
-                finish()   // Volta para HomeActivity
+                db.collection("posts").add(post)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Post publicado!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Erro ao publicar: ${e.message}", Toast.LENGTH_LONG).show()
+                        binding.btnPublicar.isEnabled = true
+                    }
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Erro ao publicar: ${e.message}", Toast.LENGTH_LONG).show()
+            .addOnFailureListener {
+                Toast.makeText(this, "Erro ao buscar perfil do usuário", Toast.LENGTH_SHORT).show()
                 binding.btnPublicar.isEnabled = true
             }
     }

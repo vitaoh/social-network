@@ -14,6 +14,35 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgPerfilItem"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/empty_profile"
+                android:contentDescription="Foto do autor"
+                app:shapeAppearanceOverlay="@null"
+                app:cornerFamily="rounded"
+                app:cornerSize="50%" />
+
+            <TextView
+                android:id="@+id/tvUsernameItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="username" />
+
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/imgPostItem"
             android:layout_width="match_parent"
